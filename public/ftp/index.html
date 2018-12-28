@@ -4,10 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Index</title>
+  <title>Estadísticas</title>
+  <style media="screen">
+    .chart-container
+    {
+      width:400px;
+      height:400px;
+    }
+  </style>
 </head>
 <body>
-  <h1>This is an INDEX</h1>
-  <a href="page.html">Click here</a>
+  <h1>Escuela Los Arrayanes</h1>
+  <h2>Estadísticas de votación</h2>
+  <br>
+  <div class="chart-container">
+    <canvas id="myChart" style="position:relative; width:0.5vw; height:1vw"></canvas>
+  </div>
+  <script type="text/javascript" src="js/dist/Chart.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

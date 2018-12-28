@@ -1,6 +1,7 @@
 var express = require('express');
 var serveStatic = require('serve-static');
 var cors = require('cors');
+var ip = require('ip');
 var app = express();
 
 var Vote = nuevaVotacion();
@@ -22,24 +23,38 @@ function setupExpress()
   app.get('/addAFavor',function(req,res)
   {
     Vote['aFavor']+=1;
-    console.log('Added 1 aFavor');
+    logVoteStatus();
     res.send('Success');
   });
   app.get('/addEnContra',function(req,res)
   {
     Vote['enContra'] +=1;
-    console.log('Added 1 enContra');
+    logVoteStatus();
     res.send('Success');
   });
-
+  app.get('/addAbstencion',function(req,res)
+  {
+    Vote['abstenciones'] +=1;
+    logVoteStatus();
+    res.send('Success');
+  });
   app.get('/nuevaVotacion',function(req,res){
     Vote = nuevaVotacion();
+    logVoteStatus();
     res.send('Success');
   });
 
   app.listen(3000, function(){
-  	console.log('Server running at URL http://localhost:3000/');
+  	console.log('Server running at URL http://'+ ip.address() +':3000/');
   });
+}
+
+function logVoteStatus()
+{
+  console.log('ID: ' + Vote['ID']);
+  console.log('A Favor: ' + Vote['aFavor']);
+  console.log('En Contra: ' + Vote['enContra']);
+  console.log('Abstenciones: ' + Vote['abstenciones']);
 }
 
 function nuevaVotacion()
