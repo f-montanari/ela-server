@@ -6,20 +6,54 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Estadísticas</title>
   <style media="screen">
+    body
+    {
+      margin:0;
+    }
     .chart-container
     {
-      width:400px;
-      height:400px;
+      width: 75%;
+      margin-left: 12.5%;
+      margin-bottom: 2%;
+    }
+    .control-container
+    {
+      width: 50%;
+      margin:0 auto;
+    }
+    .control-container form{
+      float:left;
+    }
+    .main-container
+    {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 50%;
+      margin: 0 auto;
     }
   </style>
 </head>
 <body>
+  <center>
   <h1>Escuela Los Arrayanes</h1>
   <h2>Estadísticas de votación</h2>
+</center>
   <br>
-  <div class="chart-container">
-    <canvas id="myChart" style="position:relative; width:0.5vw; height:1vw"></canvas>
-  </div>
+    <div class="main-container">
+      <div class="chart-container">
+        <canvas id="myChart"></canvas>
+      </div><br>
+      <div class="control-container">
+        <form action="nuevaVotacion" method="get" target="request">
+          <input type="submit" value="Nueva Votacion"/>
+        </form>
+        <form action="cancelarVotacion" method="get" target="request">
+          <input type="submit" value="Cancelar Votacion"/>
+        </form>
+      </div>
+    </div>
+  <iframe name="request" style="display:none;" frameborder="0"></iframe>
   <script type="text/javascript" src="js/dist/Chart.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>

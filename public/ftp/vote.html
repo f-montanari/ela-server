@@ -1,0 +1,17 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Votación</title>
+</head>
+<body>
+  <form action="multiVotacion" method="post" target="data">
+    <input required name="aFavor" type="number" value="0" min="0" step="1"/><br>
+    <input required name="enContra" type="number" value="0" min="0" step="1"/><br>
+    <input required name="abstenciones" type="number" value="0" min="0" step="1"/><br>
+    <input type="submit" value="Enviar Votacion">
+  </form>
+  <iframe name="data" width="100" height="100" style="visibility:hidden"></iframe>
+</body>
+</html>

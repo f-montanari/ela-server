@@ -22,7 +22,10 @@ var chartData = {
 var myPieChart = new Chart(ctx,{
   type: 'pie',
   data: chartData,
-  options: Chart.defaults.pie
+  options: {
+    responsive:true,
+    aspectRatio:1
+  }
 });
 
 fetchData(true);
