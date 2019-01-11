@@ -4,14 +4,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Votación</title>
+  <link rel="stylesheet" href="css/dist/material.min.css" />
+  <link rel="stylesheet" href="css/vote.css" />
+  <script src="js/dist/material.min.js"></script>
 </head>
 <body>
-  <form action="multiVotacion" method="post" target="data">
-    <input required name="aFavor" type="number" value="0" min="0" step="1"/><br>
-    <input required name="enContra" type="number" value="0" min="0" step="1"/><br>
-    <input required name="abstenciones" type="number" value="0" min="0" step="1"/><br>
-    <input type="submit" value="Enviar Votacion">
-  </form>
+  <!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Votación de Enmienda</span>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Votación de Enmienda</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <!-- Content -->
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--middle">
+          <form action="multiVotacion" method="post" target="data">
+            <div class="mdl-textfield mdl-js-textfield">
+              <label class="mdl-textfield__label" for="aFavor">A Favor</label>
+              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="aFavor" type="number" min="0" step="1"/>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield">
+              <label class="mdl-textfield__label" for="enContra">En Contra</label>
+              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="enContra" type="number" min="0" step="1"/>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield">
+              <label class="mdl-textfield__label" for="abstenciones">Abstenciones</label>
+              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="abstenciones" type="number" min="0" step="1"/>
+            </div>
+            <br>
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Enviar Votacion">
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
   <iframe name="data" width="100" height="100" style="visibility:hidden"></iframe>
 </body>
 </html>

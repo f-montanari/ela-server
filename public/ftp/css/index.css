@@ -1,0 +1,26 @@
+body
+{
+  margin:0;
+}
+.chart-container
+{
+  width: 75%;
+  margin-left: 12.5%;
+  margin-bottom: 2%;
+}
+.control-container
+{
+  width: 50%;
+  margin:0 auto;
+}
+.control-container form{
+  float:left;
+}
+.main-container
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+}

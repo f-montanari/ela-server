@@ -12,7 +12,7 @@ function setupExpress()
 {
   app.use(cors());
   app.use(express.json());
-  app.use(express.urlencoded());
+  app.use(express.urlencoded({extended:false}));
   app.use(serveStatic('public/ftp'));
   app.get('/getCurrentVoteID',function(req,res)
   {
