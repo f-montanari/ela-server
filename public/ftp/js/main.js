@@ -54,4 +54,5 @@ function showData(finalData)
   myPieChart.data.datasets[0].data[1] = endData.enContra;
   myPieChart.data.datasets[0].data[2] = endData.abstenciones;
   myPieChart.update();
+  document.querySelector('.cantTotalPaises').innerHTML = endData.cantPaises;
 }

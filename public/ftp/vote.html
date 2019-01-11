@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Votación</title>
   <link rel="stylesheet" href="css/dist/material.min.css" />
+  <link rel="stylesheet" href="css/dist/dialog-polyfill.css" />
   <link rel="stylesheet" href="css/vote.css" />
   <script src="js/dist/material.min.js"></script>
 </head>
@@ -32,23 +33,42 @@
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col mdl-cell--middle">
           <form action="multiVotacion" method="post" target="data">
+            <input type="text" id="nombreActual" name="Nombre" style="display:none" />
             <div class="mdl-textfield mdl-js-textfield">
               <label class="mdl-textfield__label" for="aFavor">A Favor</label>
-              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="aFavor" type="number" min="0" step="1"/>
+              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="aFavor" id="aFavor" type="number" min="0" step="1"/>
             </div>
             <br>
             <div class="mdl-textfield mdl-js-textfield">
               <label class="mdl-textfield__label" for="enContra">En Contra</label>
-              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="enContra" type="number" min="0" step="1"/>
+              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="enContra" id="enContra" type="number" min="0" step="1"/>
             </div>
             <br>
             <div class="mdl-textfield mdl-js-textfield">
               <label class="mdl-textfield__label" for="abstenciones">Abstenciones</label>
-              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="abstenciones" type="number" min="0" step="1"/>
+              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="abstenciones" id="abstenciones" type="number" min="0" step="1"/>
             </div>
             <br>
             <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Enviar Votacion">
           </form>
+
+          <!-- Settings Dialog -->
+          <button id="show-dialog" type="button" class="mdl-button">Show Dialog</button>
+          <dialog class="mdl-dialog">
+            <h4>Configurar Usuario</h4>
+            <form id="settingsForm" method="post" action="registerUser" target="data">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" name="Nombre" id="Nombre">
+                <label class="mdl-textfield__label" for="Nombre">Nombre</label>
+              </div>
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" name="cantPaises" id="cantPaises">
+                <label class="mdl-textfield__label" for="Paises">Paises a cargo</label>
+              </div>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect submit" type="submit">Aceptar</button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect close">Cerrar</button>
+            </form>
+          </dialog>
         </div>
       </div>
     </div>
@@ -56,5 +76,7 @@
 </div>
 
   <iframe name="data" width="100" height="100" style="visibility:hidden"></iframe>
+  <script src="js/dist/dialog-polyfill.js"></script>
+  <script src="js/vote.js"></script>
 </body>
 </html>

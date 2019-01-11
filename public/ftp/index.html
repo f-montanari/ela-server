@@ -17,7 +17,10 @@
   </center>
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col">
-      <!--Spacer-->
+      <center>
+        <h5>Cantidad de Paises Presentes</h5>
+        <p class="cantTotalPaises"></p>
+      </center>
     </div>
     <div class="mdl-cell mdl-cell--4-col">
       <canvas id="myChart"></canvas>
@@ -27,6 +30,14 @@
       <form action="cancelarVotacion" method="get" target="request">
         <input class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" type="submit" value="Cancelar Votacion"/>
       </form>
+    </div>
+    <div class="mdl-cell mdl-cell--4-col">
+      <center>
+        <h5>Estado de la votación</h5>
+        <ul class="clientList">
+          
+        </ul>
+      </center>
     </div>
   </div>
   <iframe name="request" style="display:none;" frameborder="0"></iframe>
