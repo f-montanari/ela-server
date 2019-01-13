@@ -2,3 +2,21 @@ form, form input, .mdl-textfield
 {
   width:100%;
 }
+
+a.mdl-navigation__link i.material-icons
+{
+  float:left;
+  margin-right:10px;
+}
+
+a.mdl-navigation__link p
+{
+  margin:0;
+}
+
+@media screen and (max-width:1024px) {
+  a.mdl-navigation__link p
+  {
+    margin-top:10px;
+  }
+}

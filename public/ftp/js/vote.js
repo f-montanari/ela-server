@@ -13,6 +13,12 @@ dialog.querySelector('.close').addEventListener('click', function() {
 dialog.querySelector('.submit').addEventListener('click', function(){
   var nameField = document.querySelector('#nombreActual');
   nameField.value = dialog.querySelector('#Nombre').value;
-  dialog.querySelector('#settingsForm').submit();  
+  dialog.querySelector('#settingsForm').submit();
   dialog.close();
 });
+// Show config when first loaded.
+dialog.showModal();
+function hideDrawer()
+{
+  document.querySelector('.mdl-layout').MaterialLayout.toggleDrawer();
+}

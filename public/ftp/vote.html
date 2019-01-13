@@ -22,10 +22,7 @@
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Votación de Enmienda</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" id="show-dialog" onclick="hideDrawer()" href="#"><i class="material-icons">settings</i><p> Cambiar Configuración</p></a>
     </nav>
   </div>
   <main class="mdl-layout__content">
@@ -54,7 +51,6 @@
           </form>
 
           <!-- Settings Dialog -->
-          <button id="show-dialog" type="button" class="mdl-button">Show Dialog</button>
           <dialog class="mdl-dialog">
             <h4>Configurar Usuario</h4>
             <form id="settingsForm" method="post" action="registerUser" target="data">
