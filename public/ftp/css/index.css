@@ -36,5 +36,12 @@ ul.clientList li.ready
 
 ul.clientList li
 {
-  display:block;  
+  display:block;
+}
+
+.mdl-button
+{
+  margin:5px;
+  margin-top:25px;
+  float:left;
 }

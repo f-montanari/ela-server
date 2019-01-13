@@ -63,6 +63,12 @@ function setupExpress()
     res.send(JSON.stringify(currentClients));
   });
 
+  app.get('/resetClients', function(req,res)
+  {
+    currentClients = [];
+    res.send("Success");
+  });
+
   app.listen(3000, function(){
   	console.log('Server running at URL http://'+ ip.address() +':3000/');
   });

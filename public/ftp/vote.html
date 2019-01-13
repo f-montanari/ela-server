@@ -12,65 +12,70 @@
 </head>
 <body>
   <!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Votación de Enmienda</span>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Votación de Enmienda</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" id="show-dialog" onclick="hideDrawer()" href="#"><i class="material-icons">settings</i><p> Cambiar Configuración</p></a>
+      </nav>
     </div>
-  </header>
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Votación de Enmienda</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" id="show-dialog" onclick="hideDrawer()" href="#"><i class="material-icons">settings</i><p> Cambiar Configuración</p></a>
-    </nav>
-  </div>
-  <main class="mdl-layout__content">
-    <div class="page-content">
-      <!-- Content -->
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--12-col mdl-cell--middle">
-          <form action="multiVotacion" method="post" target="data">
-            <input type="text" id="nombreActual" name="Nombre" style="display:none" />
-            <div class="mdl-textfield mdl-js-textfield">
-              <label class="mdl-textfield__label" for="aFavor">A Favor</label>
-              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="aFavor" id="aFavor" type="number" min="0" step="1"/>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield">
-              <label class="mdl-textfield__label" for="enContra">En Contra</label>
-              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="enContra" id="enContra" type="number" min="0" step="1"/>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield">
-              <label class="mdl-textfield__label" for="abstenciones">Abstenciones</label>
-              <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="abstenciones" id="abstenciones" type="number" min="0" step="1"/>
-            </div>
-            <br>
-            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Enviar Votacion">
-          </form>
-
-          <!-- Settings Dialog -->
-          <dialog class="mdl-dialog">
-            <h4>Configurar Usuario</h4>
-            <form id="settingsForm" method="post" action="registerUser" target="data">
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <!-- Content -->
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--12-col mdl-cell--middle">
+            <form action="multiVotacion" name="VoteData" method="post" onsubmit="return validateForm()" target="data">
+              <input type="text" id="nombreActual" name="Nombre" style="display:none" />
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" name="Nombre" id="Nombre">
-                <label class="mdl-textfield__label" for="Nombre">Nombre</label>
+                <label class="mdl-textfield__label" for="aFavor">A Favor</label>
+                <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="aFavor" id="aFavor" type="number" min="0" step="1"/>
               </div>
+              <br>
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" name="cantPaises" id="cantPaises">
-                <label class="mdl-textfield__label" for="Paises">Paises a cargo</label>
+                <label class="mdl-textfield__label" for="enContra">En Contra</label>
+                <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="enContra" id="enContra" type="number" min="0" step="1"/>
               </div>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect submit" type="submit">Aceptar</button>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect close">Cerrar</button>
+              <br>
+              <div class="mdl-textfield mdl-js-textfield">
+                <label class="mdl-textfield__label" for="abstenciones">Abstenciones</label>
+                <input class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" required name="abstenciones" id="abstenciones" type="number" min="0" step="1"/>
+              </div>
+              <br>
+              <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit" value="Enviar Votacion">
             </form>
-          </dialog>
+
+            <!-- Settings Dialog -->
+            <dialog class="mdl-dialog">
+              <h4>Configurar Usuario</h4>
+              <form id="settingsForm" method="post" action="registerUser" target="data">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" name="Nombre" id="Nombre">
+                  <label class="mdl-textfield__label" for="Nombre">Nombre</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" name="cantPaises" id="cantPaises">
+                  <label class="mdl-textfield__label" for="Paises">Paises a cargo</label>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect submit" type="submit">Aceptar</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect close">Cerrar</button>
+              </form>
+            </dialog>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-</div>
+    </main>
+  </div>
+
+  <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button type="button" class="mdl-snackbar__action"></button>
+  </div>
 
   <iframe name="data" width="100" height="100" style="visibility:hidden"></iframe>
   <script src="js/dist/dialog-polyfill.js"></script>
