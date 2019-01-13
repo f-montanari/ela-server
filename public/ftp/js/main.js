@@ -79,6 +79,7 @@ function addElement(nombre, ready)
   var node = document.createElement("li");
   var name = document.createTextNode(nombre);
   node.appendChild(name);
+  node.classList.add("mdl-list__item");
   if(ready)
   {
     node.classList.add("ready");

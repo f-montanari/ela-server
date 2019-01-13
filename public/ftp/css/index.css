@@ -33,3 +33,8 @@ ul.clientList li.ready
 {
   color:green;
 }
+
+ul.clientList li
+{
+  display:block;  
+}
