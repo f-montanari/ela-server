@@ -44,6 +44,10 @@ function fetchData(recursion) {
       }
       showData(fetchedData);
     });
+    fetch("http://"+window.location.hostname+":3000/getUserStatus").then((response)=>{
+      return response.json()}).then((jsonData) => {
+          showUsers(jsonData);
+    });
 }
 
 // Update pie chart dataset.
@@ -55,4 +59,33 @@ function showData(finalData)
   myPieChart.data.datasets[0].data[2] = endData.abstenciones;
   myPieChart.update();
   document.querySelector('.cantTotalPaises').innerHTML = endData.cantPaises;
+}
+
+var cachedData;
+
+function showUsers(data)
+{
+  // Clear list
+  document.querySelector('.clientList').innerHTML="";
+  // Add elements
+  for(var i = 0;i<data.length;i++)
+  {
+      addElement(data[i].Nombre, data[i].voted);
+  }
+}
+
+function addElement(nombre, ready)
+{
+  var node = document.createElement("li");
+  var name = document.createTextNode(nombre);
+  node.appendChild(name);
+  if(ready)
+  {
+    node.classList.add("ready");
+  }
+  else
+  {
+    node.classList.add("notReady");
+  }
+  document.getElementById('clientList').appendChild(node);
 }

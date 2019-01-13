@@ -24,3 +24,12 @@ body
   width: 50%;
   margin: 0 auto;
 }
+
+ul.clientList li.notReady
+{
+  color:red;
+}
+ul.clientList li.ready
+{
+  color:green;
+}

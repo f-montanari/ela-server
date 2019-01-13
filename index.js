@@ -35,39 +35,32 @@ function setupExpress()
   });
   app.post('/multiVotacion',function(req,res){
     console.log(req.body);
-    Vote['aFavor']+=parseInt(req.body.aFavor);
-    Vote['enContra']+=parseInt(req.body.enContra);
-    Vote['abstenciones']+=parseInt(req.body.abstenciones);
+    for (var i = 0; i < currentClients.length; i++) {
+      if(currentClients[i].Nombre === req.body.Nombre)
+      {
+        // We found the client, did he vote?
+        if(!currentClients[i].voted)
+        {
+          Vote['aFavor']+=parseInt(req.body.aFavor);
+          Vote['enContra']+=parseInt(req.body.enContra);
+          Vote['abstenciones']+=parseInt(req.body.abstenciones);
+          currentClients[i].voted = true;
+        }
+        break;
+      }
+    }
+
     res.send('Success');
 
   });
   app.post('/registerUser',function(req,res)
   {
-    console.log(req.body);
-    var name = req.body.Nombre;
-    var cantPaises = req.body.cantPaises
-    if(currentClients.length>0)
-    {
-      if( !currentClients.find(function (cliente){
-        if(cliente.Nombre === this.Nombre)
-        {
-          console.log("El cliente ya existe, actualizando cantPaises")
-          cliente.cantPaises = this.cantPaises;
-          return true;
-        }
-        else return false;
-      },req.body))
-      {
-        currentClients.push(req.body);
-      }
-    }
-    else{
-      currentClients.push(req.body)
-    }
-    updateCantPaises();
-    console.log("Clientes actuales:");
-    console.log(currentClients);
-    res.send('Success');
+    registerUser(req,res);
+  });
+
+  app.get('/getUserStatus',function(req,res)
+  {
+    res.send(JSON.stringify(currentClients));
   });
 
   app.listen(3000, function(){
@@ -90,6 +83,9 @@ function nuevaVotacion()
   var id = Math.round(Math.random() * Math.pow(10,4));
   // Get a new vote instance
   obj = createVotacion(id,getCantPaisesTotal(),0,0,0);
+
+  resetClientVoteStatus();
+
   return obj;
 }
 
@@ -106,7 +102,6 @@ function getCantPaisesTotal()
     {
         cantActual += parseInt(clients.cantPaises);
     });
-    console.log(cantActual);
     return cantActual;
   }
 }
@@ -125,4 +120,50 @@ function createVotacion(id, cantPaises, aFavor, enContra, abstenciones)
     'enContra':enContra,
     'abstenciones':abstenciones
   };
+}
+
+function registerUser(req, res)
+{
+  console.log(req.body);
+  var name = req.body.Nombre;
+  var cantPaises = req.body.cantPaises;
+  var user = {
+    'Nombre':name,
+    'cantPaises':cantPaises,
+    'voted':false
+  };
+  if(currentClients.length>0)
+  {
+    if( !currentClients.find(function (cliente){
+      if(cliente.Nombre === this.Nombre)
+      {
+        console.log("El cliente ya existe, actualizando cantPaises")
+        cliente.cantPaises = this.cantPaises;
+        return true;
+      }
+      else return false;
+    },req.body))
+    {
+      currentClients.push(user);
+    }
+  }
+  else{
+    currentClients.push(user)
+  }
+  updateCantPaises();
+  console.log("Clientes actuales:");
+  console.log(currentClients);
+  res.send('Success');
+}
+
+function resetClientVoteStatus()
+{
+  if(!currentClients)
+  {
+    // isn't initialized yet, return.
+    return;
+  }
+  for (var i = 0; i < currentClients.length; i++) {
+    currentClients[i].voted = false;
+  }
 }
