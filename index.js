@@ -22,7 +22,8 @@ function setupExpress()
   // Router
   app.get('/getCurrentVoteID',function(req,res)
   {
-    res.send(Vote['ID']);
+    var obj = { 'ID' : Vote['ID']};
+    res.send(JSON.stringify(obj));
   })
   app.get('/getCurrentVote', cors(), function(req,res)
   {

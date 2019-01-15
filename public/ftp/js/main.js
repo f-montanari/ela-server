@@ -25,7 +25,10 @@ var myPieChart = new Chart(ctx,{
   data: chartData,
   options: {
     responsive:true,
-    aspectRatio:1
+    aspectRatio:1,
+    animation: {
+      duration:500
+    }
   }
 });
 
@@ -40,7 +43,7 @@ function fetchData(recursion) {
       if(recursion)
       {
         // Avoid recursion.
-        setInterval(()=>{this.fetchData(false)},1000);
+        setInterval(()=>{this.fetchData(false)},500);
       }
       showData(fetchedData);
     });
