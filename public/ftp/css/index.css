@@ -45,3 +45,12 @@ ul.clientList li
   margin-top:25px;
   float:left;
 }
+
+.botonera
+{
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  justify-content: center;
+}

@@ -59,7 +59,7 @@ function showData(finalData)
   endData = finalData;
   myPieChart.data.datasets[0].data[0] = endData.aFavor;
   myPieChart.data.datasets[0].data[1] = endData.enContra;
-  myPieChart.data.datasets[0].data[2] = endData.abstenciones;
+  myPieChart.data.datasets[0].data[2] = endData.abstenciones;  
   myPieChart.update();
   document.querySelector('.cantTotalPaises').innerHTML = endData.cantPaises;
 }
