@@ -1,6 +1,6 @@
 // Code to setup pie chart.
 var ctx = document.getElementById("myChart");
-var endData = null;
+var finalData = null;
 var chartData = {
   labels:["A Favor", "En Contra", "Abstenciones"],
   datasets:[{
@@ -32,11 +32,19 @@ var myPieChart = new Chart(ctx,{
   }
 });
 
+document.querySelector('#newVote').addEventListener('mousedown', () =>{
+  isNewVote = true;
+});
+
 fetchData(true);
 
 // This function periodically gets data from server every second.
 function fetchData(recursion) {
   var fetchedData = null;
+  fetch("http://"+window.location.hostname+":3000/getUserStatus").then((response)=>{
+      return response.json()}).then((jsonData) => {
+          showUsers(jsonData);
+    });
   fetch("http://"+window.location.hostname+":3000/getCurrentVote").then((response)=>{
     return response.json()}).then((jsonData) => {
       fetchedData = jsonData;
@@ -47,34 +55,56 @@ function fetchData(recursion) {
       }
       showData(fetchedData);
     });
-    fetch("http://"+window.location.hostname+":3000/getUserStatus").then((response)=>{
-      return response.json()}).then((jsonData) => {
-          showUsers(jsonData);
-    });
 }
+
+var readyToShowVote = false;
+var isNewVote = true;
 
 // Update pie chart dataset.
 function showData(finalData)
 {
-  endData = finalData;
-  myPieChart.data.datasets[0].data[0] = endData.aFavor;
-  myPieChart.data.datasets[0].data[1] = endData.enContra;
-  myPieChart.data.datasets[0].data[2] = endData.abstenciones;  
-  myPieChart.update();
-  document.querySelector('.cantTotalPaises').innerHTML = endData.cantPaises;
+  if(readyToShowVote === true || isNewVote === true)
+  {
+    myPieChart.data.datasets[0].data[0] = finalData.aFavor;
+    myPieChart.data.datasets[0].data[1] = finalData.enContra;
+    myPieChart.data.datasets[0].data[2] = finalData.abstenciones;
+    myPieChart.update();
+    readyToShowVote = false;
+    isNewVote = false;
+  }
+  document.querySelector('.cantTotalPaises').innerHTML = finalData.cantPaises;
 }
-
-var cachedData;
 
 function showUsers(data)
 {
+  var votedCount = 0;
   // Clear list
   document.querySelector('.clientList').innerHTML="";
+
   // Add elements
   for(var i = 0;i<data.length;i++)
   {
       addElement(data[i].Nombre, data[i].voted);
+      if(data[i].voted)
+      {
+        votedCount+=1;
+      }
   }
+
+  // Check if everyone's voted yet
+  if(votedCount === data.length)
+  {
+    readyToShowVote = true;
+  }
+  else
+  {
+    readyToShowVote = false;
+  }
+}
+
+function updateChart()
+{
+  myPieChart.updateChart();
 }
 
 function addElement(nombre, ready)
