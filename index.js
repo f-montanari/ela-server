@@ -2,6 +2,7 @@ var express = require('express');
 var serveStatic = require('serve-static');
 var cors = require('cors');
 var ip = require('ip');
+var fs = require('fs');
 var app = express();
 
 var Vote = nuevaVotacion();
@@ -10,15 +11,20 @@ var currentClients = [];
 console.log('Current vote id = ' + Vote['ID']);
 setupExpress();
 
+fs.access('voteResults.csv', fs.constants.F_OK, (err) => {
+  fs.appendFile('voteResults.csv',"A Favor, En Contra, Abstenciones, Resultado\n", (err) => {
+    if (err) { throw err; };
+    console.log('El archivo voteResults.csv fue creado satisfactoriamente');
+  });
+});
+
 function setupExpress()
 {
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({extended:false}));
   app.use(serveStatic('public/ftp'));
-
-
-
+  
   // Router
   app.get('/getCurrentVoteID',function(req,res)
   {
@@ -46,6 +52,7 @@ function setupExpress()
           Vote['enContra']+=parseInt(req.body.enContra);
           Vote['abstenciones']+=parseInt(req.body.abstenciones);
           currentClients[i].voted = true;
+          checkVoteStatus();
         }
         break;
       }
@@ -71,7 +78,7 @@ function setupExpress()
   });
 
   app.listen(3000, function(){
-  	console.log('Server running at URL http://'+ ip.address() +':3000/');
+  	console.log('Servidor funcionando en URL http://'+ ip.address() +':3000/');
   });
 }
 
@@ -173,4 +180,59 @@ function resetClientVoteStatus()
   for (var i = 0; i < currentClients.length; i++) {
     currentClients[i].voted = false;
   }
+}
+
+function checkVoteStatus()
+{
+  var voted = 0;
+  for (var i = 0; i < currentClients.length; i++) {
+    if (currentClients[i].voted)
+    {
+      voted +=1;
+    }
+  }
+  if (currentClients.length === voted)
+  {
+    writeVoteResults();
+  }
+}
+
+function voteToCsv()
+{
+  return "" + Vote['aFavor'] + "," + Vote['enContra'] + "," + Vote['abstenciones'] + "," + decideResult() + "\n";
+}
+
+function writeVoteResults()
+{
+  fs.appendFile('voteResults.csv', voteToCsv(), (err) => {
+    if (err) { throw err; };
+    console.log('Se ha actualizado el historial de votos satisfactoriamente');
+  });
+}
+
+function decideResult()
+{
+  var result = "";
+
+  if(Vote['aFavor'] > Vote['enContra'] && Vote['aFavor'] > Vote['abstenciones'])
+  {
+    result = "Aprobada";
+  }
+  else if(Vote['enContra'] > Vote['aFavor'] && Vote['enContra'] > Vote['abstenciones'])
+  {
+    result = "Reprobada";
+  }
+  else if(Vote['abstenciones'] > Vote['aFavor'] && Vote['abstenciones'] > Vote['enContra'])
+  {
+    result = "Mayoría de Abstenciones";
+  }
+  else if(Vote['aFavor'] == Vote['enContra'])
+  {
+    result = "Empate";
+  }
+  else
+  {
+    result = "Indefinido"
+  }
+  return result;
 }
