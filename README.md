@@ -17,15 +17,11 @@ Servidor NodeJS para las votaciones de enmienda del MNU Los Arrayanes
   node index.js
 ```
 
+El servidor será iniciado en el puerto 3000 (por defecto) donde estarán las estadísticas de la votación, y el sitio donde emitir los votos.
+
 # Ejemplos
 Tomando en cuenta la IP 192.168.0.101 como la IP de la máquina que hace de servidor, y desde un __navegador__
-* Ver las estadísticas
+* Ver las estadísticas de votación
     `http://192.168.0.101:3000/`
-* Añadir un voto a favor
-    `http://192.168.0.101:3000/addAFavor`
-* Añadir un voto en contra
-    `http://192.168.0.101:3000/addEnContra`
-* Añadir una abstención
-    `http://192.168.0.101:3000/addAbstencion`
-* Hacer una nueva votación
-    `http://192.168.0.101:3000/nuevaVotacion`
+* Sitio para emitir votos
+    `http://192.168.0.101:3000/vote.html`
