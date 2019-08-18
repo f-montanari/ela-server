@@ -1,3 +1,6 @@
+var lblAFavor = document.getElementById("lblAFavor");
+var lblEnContra = document.getElementById("lblEnContra");
+
 // Code to setup pie chart.
 var ctx = document.getElementById("myChart");
 var finalData = null;
@@ -65,10 +68,16 @@ function showData(finalData)
 {
   if(readyToShowVote === true || isNewVote === true)
   {
+    // Update pie chart
     myPieChart.data.datasets[0].data[0] = finalData.aFavor;
     myPieChart.data.datasets[0].data[1] = finalData.enContra;
     myPieChart.data.datasets[0].data[2] = finalData.abstenciones;
     myPieChart.update();
+
+    // Update labels
+    lblAFavor.innerHTML = finalData.aFavor;
+    lblEnContra.innerHTML = finalData.enContra;
+
     readyToShowVote = false;
     isNewVote = false;
   }
