@@ -1,8 +1,27 @@
+@font-face {
+  font-family: "PillGothic600mgRg-Regular";
+  src: url("fonts/PillGothic600mg-Regular.ttf");
+}
+@font-face {
+  font-family: "PillGothic600mgRg-Bold";
+  src: url("fonts/PillGothic600mg-Bold.ttf");
+}
+
+
 body
 {
   margin:0;
-  margin-top:-24px;
+  margin-top:-24px;  
 }
+
+h1 {
+	font-family: 	"PillGothic600mgRg-Bold", Arial;
+}
+
+h2, h3, h4, h5 {
+	font-family: 	"PillGothic600mgRg-Regular", Arial;
+}
+
 .chart-container
 {
   width: 75%;
@@ -42,7 +61,9 @@ ul.clientList li.ready
 
 p.display-big
 {
-  font-size:56px;
+	font-family: 	"PillGothic600mgRg-Bold" ;
+	font-size:		200px;
+	padding-top:	70px;
 }
 
 ul.clientList li
@@ -71,3 +92,9 @@ ul.clientList li
 {
   text-align: center;
 }
+
+#nuevavotacion {
+	width: 25%}
+
+#lblAFavor {color: #00CC00}
+#lblEnContra {color: #DD0000}

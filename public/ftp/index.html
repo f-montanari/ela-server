@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,24 +13,28 @@
 </head>
 <body>
   <center>
-    <h1>Escuela Los Arrayanes</h1>
-    <h2>Estadísticas de votación</h2>
+    <h2 style="padding: 40px 0 0 0">Xº MNU Los Arrayanes</h2>
+    <h1 style="line-height: 50px; color:#0A096B; font-size: 90px">Votación de Enmiendas</h1>
+    <br><br><br>
   </center>
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col">
       <center>
-        <h2>Cantidad de Paises Presentes</h2>
+        <h2>&nbsp;</h2>
+        <h2>&nbsp;</h2>
+        <h2>Delegaciones<br>
+        presentes</h2>
         <p class="cantTotalPaises display-big"></p>
       </center>
     </div>
     <div class="mdl-cell mdl-cell--4-col">
       <canvas id="myChart"></canvas>
-      <form action="nuevaVotacion" method="get" target="request">
+      <!-- form action="nuevaVotacion" method="get" target="request">
         <input class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" type="submit" id="newVote" value="Nueva Votacion"/>
-      </form>
-      <form action="resetClients" method="get" target="request">
+      </form-->
+      <!--form action="resetClients" method="get" target="request">
         <input class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised" type="submit" value="Reiniciar conexiones"/>
-      </form>
+      </form-->
     </div>
     <div class="mdl-cell mdl-cell--4-col text-center">            
       <div>
@@ -38,7 +42,9 @@
         <p class="display-big" id="lblAFavor">0</p>
       </div>
       <div>
-        <h2>En Contra</h2>
+        <h2>&nbsp;</h2>
+        <h2><br>
+        En Contra</h2>
         <p class="display-big" id="lblEnContra">0</p>
       </div>      
     </div>
@@ -49,6 +55,21 @@
       <ul id="clientList" class="mdl-list clientList">
       </ul>
     </center>
+    <br><br><br><br>
+	  <div id="btndeabajo">
+	  	<table width="25%" align="center">
+	  	<tr>
+      <td style="text-align: center">
+       <form action="nuevaVotacion" method="get" target="request">
+        <input class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-button--accent" type="submit" id="newVote" value="Nueva Votacion"/>
+      </form>
+      <form action="resetClients" method="get" target="request">
+        <input class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised" type="submit" value="Reiniciar conexiones"/>
+      </form>
+			</td>
+			</tr>
+		</table>
+	  </div>
   </div>
   <iframe name="request" style="display:none;" frameborder="0"></iframe>
   <script type="text/javascript" src="js/dist/Chart.min.js"></script>

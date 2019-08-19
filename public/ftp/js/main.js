@@ -10,8 +10,8 @@ var chartData = {
     label: '# Nº de votos',
     data: [0, 0, 0],
     backgroundColor: [
-      '#72C740',
-      '#DD0033',
+      '#00CC00',
+      '#DD0000',
       '#E4D549'
     ],
     borderColor: [
@@ -31,6 +31,9 @@ var myPieChart = new Chart(ctx,{
     aspectRatio:1,
     animation: {
       duration:500
+    },
+    legend:{
+      display:false
     }
   }
 });
